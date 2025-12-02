@@ -42,7 +42,7 @@ def generate_question(api_key: str,
         """
         return call_gemini_api(api_key, prompt)
     
-    if type == "multiple_choice":
+    elif type == "multiple_choice":
         prompt = """Generate an IELTS-style multiple choice Given question, based on the passage below.
         
         return the output in **strict JSON** format with the following structure.
@@ -56,23 +56,23 @@ def generate_question(api_key: str,
         
         Example:
         {
-        "question": "What does a white belt usually represent in martial arts?",
+        "question": "In which year was Marie Curie born?",
         "options": {
-            "A": "Beginner level",
-            "B": "Expert level",
-            "C": "Instructor",
-            "D": "Intermediate level"
+            "A": "1867",
+            "B": "1873",
+            "C": "1881",
+            "D": "1890"
         },
         "answer": "A",
-        "description": "White belts signify a beginner level, representing a clean slate and the start of training.",
-        }
+        "description": "Marie Curie was born in Poland in 1867, as stated in the passage."
+        },
 
         Passage:
         {passage}
         """
         return call_gemini_api(api_key, prompt)
     
-    if type == "short_answer":
+    elif type == "short_answer":
         prompt = """Generate an IELTS-style question for short-answer based on the passage below.
 
         return the output in **strict JSON** format with the following structure.
@@ -84,10 +84,10 @@ def generate_question(api_key: str,
         | description | str | Description of answer |
 
         Example:
-        {
-        "question": "What gas do plants absorb from the atmosphere during photosynthesis?",
-        "answer": "Carbon dioxide",
-        "description": "During photosynthesis, plants absorb carbon dioxide (CO2) and use sunlight to produce oxygen and glucose."
+         },
+        "question": "Who were Marie Curie’s research partners when she won the 1903 Nobel Prize for Physics?",
+        "answer": "Pierre Curie and Henri Becquerel",
+        "description": "Marie Curie shared the 1903 Nobel Prize for Physics with her husband Pierre Curie and Henri Becquerel for their work on radioactivity."
         }
 
         Passage:

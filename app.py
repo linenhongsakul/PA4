@@ -34,18 +34,25 @@ if submit_button:
     # Multiple choice
     with st.container(border=True):
         st.subheader("Multiple Choice")
-        st.markdown(f"**2. This is the second question**")
-        st.markdown(f"A) High cost of installation")
-        st.markdown(f"B) High cost of installation")
-        st.markdown(f"C) High cost of installation")
-        st.markdown(f"D) High cost of installation")
-        st.markdown(f"Answer: B")
-        st.markdown(f"This is the description.")
+        data = generate_question(api_key=api_key,
+                                passage=passage,
+                                type="multiple_choice")
+        
+        st.markdown(f"**2. {data['question']}**")
+        st.markdown(f"Answer: {data['answer']}")
+        st.markdown(data["description"])
+        
 
     # Short Answer Questions
     with st.container(border=True):
         st.subheader("Short Answer Questions")
-        st.markdown(f"**3. This is the third question**")
-        st.markdown(f"Answer: short answer")
-        st.markdown(f"This is the description.")
+        data = generate_question(api_key=api_key,
+                                passage=passage,
+                                type="short_answer")
+        
+        st.markdown(f"**3. {data['question']}**")
+        st.markdown(f"Answer: {data['answer']}")
+        st.markdown(data["description"])
+        
+
 

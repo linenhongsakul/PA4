@@ -41,6 +41,65 @@ def generate_question(api_key: str,
         {passage}
         """
         return call_gemini_api(api_key, prompt)
+    
+    if type == "multiple_choice":
+        prompt = """Generate an IELTS-style multiple choice Given question, based on the passage below.
+        
+        return the output in **strict JSON** format with the following structure.
+        **Expected Output Schema**
+        | Column | Type | Description |
+        |---------|------|--------------|
+        | question | str | IELTS-style question based on the passage |
+        | answer | str | A / B / C / D |
+        | description | str | Description of answer |
+      
+        
+        Example:
+        {
+        "question": "What does a white belt usually represent in martial arts?",
+        "options": {
+            "A": "Beginner level",
+            "B": "Expert level",
+            "C": "Instructor",
+            "D": "Intermediate level"
+        },
+        "answer": "A",
+        "description": "White belts signify a beginner level, representing a clean slate and the start of training.",
+        }
+
+        Passage:
+        {passage}
+        """
+        return call_gemini_api(api_key, prompt)
+    
+    if type == "short_answer":
+        prompt = """Generate an IELTS-style question for short-answer based on the passage below.
+
+        return the output in **strict JSON** format with the following structure.
+        **Expected Output Schema**
+        | Column | Type | Description |
+        |---------|------|--------------|
+        | question | str | IELTS-style question based on the passage |
+        | answer | str | short answer |
+        | description | str | Description of answer |
+
+        Example:
+        {
+        "question": "What gas do plants absorb from the atmosphere during photosynthesis?",
+        "answer": "Carbon dioxide",
+        "description": "During photosynthesis, plants absorb carbon dioxide (CO2) and use sunlight to produce oxygen and glucose."
+        }
+
+        Passage:
+        {passage}
+        """
+
+    else:
+        raise ValueError("Error")
+        
+    return call_gemini_api(api_key, prompt)
+
+
 
 if __name__ == '__main__':
     api_key = "AIzaSyD_9P-QWjjJKd23chwPSxpbmC72Dhiyx5Q"
